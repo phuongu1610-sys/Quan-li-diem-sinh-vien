@@ -25,7 +25,7 @@ df = pd.DataFrame(data, index=range(1, 11))
 
 # 2. Tính điểm tổng kết (Chuyên cần 20%, Giữa kỳ 30%, Cuối kỳ 50%)
 df["Tong_ket"] = (
-    0.2 * df["Chuyen_can"] + 0.3 * df["Giua_ky"] + 0.5 * df["Cuối_ky"]
+    0.2 * df["Chuyen_can"] + 0.3 * df["Giua_ky"] + 0.5 * df["Cuoi_ky"]
 )
 df["Tong_ket"] = df["Tong_ket"].round(2)
 
@@ -93,7 +93,7 @@ selected_student = st.selectbox(
 student_info = df[df["Ho_ten"] == selected_student].iloc[0]
 st.info(f"Thông tin chi tiết của **{selected_student}**:")
 s_col1, s_col2, s_col3, s_col4, s_col5 = st.columns(5)
-s_col1.metric("Chuyên cần", student_info["Chuyên_can"])
+s_col1.metric("Chuyên cần", student_info["Chuyen_can"])
 s_col2.metric("Giữa kỳ", student_info["Giua_ky"])
 s_col3.metric("Cuối kỳ", student_info["Cuoi_ky"])
 s_col4.metric("Tổng kết", student_info["Tong_ket"])
@@ -103,4 +103,4 @@ s_col5.metric("Xếp loại", student_info["Xep_loai"])
 st.subheader("📈 Biểu đồ điểm tổng kết của sinh viên")
 fig, ax = plt.subplots(figsize=(8, 5))
 ax.barh(df["Ho_ten"], df["Tong_ket"], color="#1976D2")
-ax.set_xlabel("Trúc điểm")
+ax.set_xlabel("Trục điểm")
