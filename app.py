@@ -104,3 +104,15 @@ st.subheader("📈 Biểu đồ điểm tổng kết của sinh viên")
 fig, ax = plt.subplots(figsize=(8, 5))
 ax.barh(df["Ho_ten"], df["Tong_ket"], color="#1976D2")
 ax.set_xlabel("Trục điểm")
+import streamlit as st
+import pandas as pd
+
+st.subheader("Biểu đồ điểm tổng kết của sinh viên")
+chart_data = df.set_index("Ho_ten")[["Tong_ket"]]
+st.bar_chart(chart_data)
+
+st.markdown("---")
+st.markdown(
+    "<p style='text-align: center; font-size: 12px; color: gray;'>Quản Nguyễn Phương Uyên - MSSV: [Nhập_MSSV_của_bạn]</p>",
+    unsafe_allow_html=True,
+)
