@@ -113,6 +113,6 @@ st.bar_chart(chart_data)
 
 st.markdown("---")
 st.markdown(
-    "<p style='text-align: center; font-size: 12px; color: gray;'>Quản Nguyễn Phương Uyên - MSSV: [Nhập_MSSV_của_bạn]</p>",
+    "<p style='text-align: center; font-size: 12px; color: gray;'>Quản Nguyễn Phương Uyên - MSSV: [008308007984]</p>",
     unsafe_allow_html=True,
 )
