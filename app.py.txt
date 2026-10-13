@@ -1,0 +1,87 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import streamlit as st
+
+data = {
+    "Ho_ten": [
+        "Phuong Uyen",
+        "Tran Minh",
+        "Le Chi",
+        "Thuy Dung",
+        "Hoang Giang",
+        "Vu Hanh",
+        "Do Nhat",
+        "Bui Lan",
+        "Ngo Gia",
+        "Vuong Nam",
+    ],
+    "Chuyen_can": [9, 8, 7, 10, 6, 8, 5, 9, 7, 4],
+    "Giua_ky": [8, 7, 6, 9, 5, 8, 4, 9, 6, 5],
+    "Cuoi_ky": [9, 8, 7, 10, 6, 9, 5, 10, 7, 4],
+}
+df = pd.DataFrame(data, index=range(1, 11))
+
+df["Tong_ket"] = (
+    0.2 * df["Chuyen_can"] + 0.3 * df["Giua_ky"] + 0.5 * df["Cuoi_ky"]
+)
+
+def xep_loai(diem):
+  if diem >= 8.5:
+    return "Gioi"
+  elif diem >= 7.0:
+    return "Kha"
+  elif diem >= 5.0:
+    return "Trung binh"
+  else:
+    return "Yeu"
+
+
+df["Xep_loai"] = df["Tong_ket"].apply(xep_loai)
+
+st.title("QUẢN LÝ ĐIỂM SINH VIÊN-")
+
+st.subheader("Bảng điểm 10 sinh viên")
+st.dataframe(df.round({"Tong_ket": 2}), width="
+
+diem_tb = df["Tong_ket"].mean()
+diem_max = df["Tong_ket"].max()
+diem_min = df["Tong_ket"].min()
+so_sv_dat = (df["Tong_ket"] >= 5).sum()
+
+st.write(f"Điểm trung bình của lớp: {round(diem_tb, 2)}")
+
+st.write("Sinh viên có điểm tổng kết cao nhất:")
+st.dataframe(df[df["Tong_ket"] == diem_max], width="stretch")
+
+st.write("Sinh viên có điểm tổng kết thấp nhất:")
+st.dataframe(df[df["Tong_ket"] == diem_min], width="stretch")
+
+st.write(f"Số sinh viên đạt: {int(so_sv_dat)}")
+
+(Selectbox)
+selected_student = st.selectbox("Chọn một sinh viên:", df["Ho_ten"])
+student_info = df[df["Ho_ten"] == selected_student].iloc[0]
+
+st.write(f"Thông tin chi tiết của **{selected_student}**:")
+st.write(f"- Chuyên cần: {student_info['Chuyen_can']}")
+st.write(f"- Giữa kỳ: {student_info['Giua_ky']}")
+st.write(f"- Cuối kỳ: {student_info['Cuoi_ky']}")
+st.write(f"- Điểm tổng kết: {round(student_info['Tong_ket'], 2)}")
+st.write(f"- Xếp loại: {student_info['Xep_loai']}")
+
+st.subheader("Biểu đồ điểm tổng kết của 10 sinh viên")
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.barh(df["Ho_ten"], df["Tong_ket"], color="#1976D2")
+ax.set_title("BIỂU ĐỒ THỂ HIỆN ĐIỂM TỔNG KẾ CỦA 10 SINH VIÊN")
+ax.set_xlabel("Trục điểm")
+ax.set_ylabel("Tên sinh viên")
+ax.invert_yaxis()
+ax.grid(axis="x", linestyle="--", alpha=0.7)
+plt.tight_layout()
+st.pyplot(fig)
+
+st.markdown(
+    "<p style='font-size: small;'>Họ tên: [Quan Nguyễn Phương Uyên] - MSSV: ["008308007984" ]</p>",
+    unsafe_allow_html=True,
+)
+```[cite: 1, 3, 5, 7, 9, 10]
